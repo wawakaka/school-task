@@ -1,0 +1,30 @@
+@startuml
+[*] --> Idle
+
+Idle --> Browsing : User buka aplikasi
+Browsing --> ViewingDetails : User pilih konten
+
+ViewingDetails --> ReadyToPlay : Detail dimuat
+ReadyToPlay --> Playing : User tekan "Putar"
+ReadyToPlay --> Resuming : Riwayat ada & user pilih "Lanjutkan"
+
+Playing --> Buffering : Jaringan lambat
+Resuming --> Buffering : Jaringan lambat
+
+Buffering --> Playing : Buffer cukup
+Buffering --> PlaybackError : Timeout / koneksi putus
+
+PlaybackError --> ViewingDetails : User kembali ke halaman detail
+PlaybackError --> [*] : User tutup aplikasi
+
+Playing --> Idle : Video selesai & tidak ada aktivitas
+Resuming --> Idle : Video selesai
+
+note right of PlaybackError
+  PlaybackError mencakup:
+  - Koneksi hilang
+  - Gagal memuat segmen video
+  - Timeout DRM, dll.
+end note
+
+@enduml

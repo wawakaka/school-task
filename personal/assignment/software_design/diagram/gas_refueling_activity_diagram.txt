@@ -1,0 +1,76 @@
+@startuml
+title Activity Diagram dengan Swimlanes: Mengisi Bensin di SPBU
+
+|Pelanggan|
+start
+:Parkir di dekat dispenser;
+:Berikan instruksi\n"Isi SUPER Rp300.000";
+
+|Petugas|
+:Periksa stok bensin;
+
+if (Stok tersedia?) then (Tidak)
+  :Beritahu: "Stok kosong";
+  |Pelanggan|
+  :Pelanggan pergi;
+  stop
+endif
+
+|Petugas|
+:Aktifkan dispenser\nuntuk Rp300.000;
+:Tawarkan bersihkan kaca;
+
+|Pelanggan|
+if (Terima tawaran?) then (Ya)
+  |Petugas|
+  :Bersihkan kaca mobil;
+endif
+
+|Sistem|
+:Isi bensin hingga\nmencapai nominal;
+:Dispenser berhenti otomatis;
+
+|Petugas|
+:Tanya: "Lanjut atau sensor?";
+|Pelanggan|
+:Pilih: "Sensor aja";
+
+|Petugas|
+:Tanya metode pembayaran;
+
+|Pelanggan|
+:Sebutkan metode\n(Kartu Kredit / QRIS);
+
+if (Metode == Kartu Kredit) then
+  |Petugas|
+  :Masukkan kartu ke EDC;\nInput nominal;
+  |Pelanggan|
+  :Masukkan PIN;
+  |Sistem|
+  :Proses transaksi kartu;
+else (QRIS)
+  |Petugas|
+  :Generate QR di EDC;
+  |Pelanggan|
+  :Scan QR;\nOtentikasi (PIN/biometrik);
+  |Sistem|
+  :Proses transaksi QRIS;
+endif
+
+|Sistem|
+if (Transaksi sukses?) then (Ya)
+  :Cetak struk;
+  |Petugas|
+  :Berikan struk ke pelanggan;
+  |Pelanggan|
+  :Terima struk;
+  stop
+else (Gagal)
+  |Petugas|
+  :Beritahu gagal;
+  |Pelanggan|
+  :Pelanggan pergi;
+  stop
+endif
+
+@enduml

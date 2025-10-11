@@ -1,0 +1,30 @@
+@startuml
+actor User
+participant "Self-Check-in Machine" as Machine
+participant "Flight Database" as DB
+participant "Boarding Pass Printer" as Printer
+
+User -> Machine: Pilih bahasa
+alt Pindai Paspor
+    User -> Machine: Pilih "Pindai paspor"
+    User -> Machine: Tempatkan e-paspor di pemindai
+    Machine -> DB: Cari penerbangan berdasarkan data paspor
+    DB --> Machine: Data penerbangan ditemukan
+    Machine --> User: Tampilkan penerbangan & konfirmasi
+    User -> Machine: Tekan "Ya"
+else Masukkan Kode Booking
+    User -> Machine: Pilih "Masukkan kode booking"
+    User -> Machine: Input kode booking + nama belakang
+    Machine -> DB: Verifikasi booking
+    DB --> Machine: Data penerbangan ditemukan
+    Machine --> User: Tampilkan penerbangan
+    User -> Machine: Konfirmasi
+end
+
+Machine -> User: Tampilkan denah kursi
+User -> Machine: Pilih kursi
+Machine -> DB: Simpan pilihan kursi
+Machine -> Printer: Cetak boarding pass
+Printer --> User: Boarding pass dicetak
+User --> Machine: Ambil boarding pass
+@enduml

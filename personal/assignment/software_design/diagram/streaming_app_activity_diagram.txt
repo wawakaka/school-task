@@ -1,0 +1,63 @@
+@startuml
+title Streaming Interaction with Swimlanes
+
+|User|
+start
+:User membuka aplikasi\n(menggunakan remote);
+:Menelusuri konten di beranda;
+:Memilih film/episode;
+
+|Sistem|
+:Tampilkan beranda dengan rekomendasi;
+:Ambil detail konten dari layanan;
+:Tampilkan halaman detail\n(sinopsis, durasi, rating);
+
+if (Ada riwayat tontonan?) then (ya)
+  :Tampilkan opsi\n"Lanjutkan dari X:XX";
+  |User|
+  :User memilih\n"Putar" atau "Lanjutkan";
+else (tidak)
+  |User|
+  :User memilih "Putar";
+endif
+
+|Sistem|
+:Periksa koneksi internet;
+
+if (Koneksi stabil?) then (ya)
+  if (User memilih "Lanjutkan"?) then (ya)
+    :Mulai pemutaran dari posisi terakhir;
+  else
+    :Mulai pemutaran dari awal;
+  endif
+  :Streaming berjalan lancar;
+  :Simpan progres tontonan secara berkala;
+  |User|
+  :Menonton hingga selesai;
+  |Sistem|
+  stop
+else (tidak stabil / putus)
+  :Tampilkan pesan error:\n"Tidak dapat memutar video.\nPeriksa koneksi internet Anda.";
+  |User|
+  :Pilih "Coba Lagi" atau "Keluar";
+
+  if (Pilih "Coba Lagi"?) then (ya)
+    |Sistem|
+    :Ulangi pengecekan koneksi;
+    if (Masih gagal?) then (ya)
+      |User|
+      :Keluar dari halaman;
+      stop
+    else
+      :Lanjutkan pemutaran;
+      |User|
+      :Menonton;
+      stop
+    endif
+  else
+    :Keluar dari halaman;
+    stop
+  endif
+endif
+
+@enduml

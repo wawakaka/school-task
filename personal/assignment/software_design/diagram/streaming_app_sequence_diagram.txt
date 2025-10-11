@@ -1,0 +1,42 @@
+@startuml
+actor User
+participant "StreamingApp" as App
+participant "ContentService" as Content
+participant "PlaybackEngine" as Player
+participant "NetworkMonitor" as Net
+
+User -> App: Buka aplikasi
+App --> User: Tampilkan beranda (rekomendasi)
+
+User -> App: Pilih konten
+App -> Content: Ambil detail konten (ID)
+Content --> App: Kembalikan metadata (sinopsis, durasi, dll.)
+
+App --> User: Tampilkan halaman detail
+
+opt Jika ada riwayat tontonan
+  App -> Content: Cek riwayat tontonan user
+  Content --> App: Kembalikan posisi terakhir (jika ada)
+  App --> User: Tampilkan opsi "Lanjutkan dari X:XX"
+end opt
+
+User -> App: Pilih "Putar" atau "Lanjutkan"
+App -> Net: Periksa koneksi jaringan
+Net --> App: Status koneksi (OK / Gagal)
+
+alt Koneksi stabil
+  App -> Player: Mulai pemutaran (dari 0 atau posisi X)
+  Player --> User: Streaming video berjalan
+  User -> Player: Tonton hingga selesai
+  Player --> App: Simpan riwayat (jika belum selesai)
+  App --> Content: Update riwayat tontonan
+else Koneksi tidak stabil / putus
+  App --> User: Tampilkan pesan error:\n"Tidak dapat memutar video.\nPeriksa koneksi internet Anda."
+  User -> App: Coba ulang (opsional)
+  App -> Net: Periksa ulang koneksi
+  Net --> App: Masih gagal
+  App --> User: Tetap tampilkan error
+  User -> App: Keluar dari halaman
+end alt
+
+@enduml

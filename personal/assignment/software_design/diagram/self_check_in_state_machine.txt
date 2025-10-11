@@ -1,0 +1,22 @@
+@startuml
+[*] --> Idle
+Idle --> LanguageSelection : User mendekat
+LanguageSelection --> VerificationOption : Bahasa dipilih
+VerificationOption --> PassportScanning : Pilih "Pindai paspor"
+VerificationOption --> BookingInput : Pilih "Kode booking"
+
+PassportScanning --> FlightMatched : Paspor terbaca & cocok
+PassportScanning --> PassportFailed : Paspor tidak terbaca
+PassportFailed --> VerificationOption : Coba lagi / ganti metode
+
+BookingInput --> FlightMatched : Booking valid
+BookingInput --> BookingFailed : Input salah < 3x
+BookingFailed --> BookingInput : Coba lagi
+BookingFailed --> ManualAssistance : Gagal 3x → alihkan ke petugas
+
+FlightMatched --> SeatSelection : Penerbangan dikonfirmasi
+SeatSelection --> BoardingPassPrinted : Kursi dipilih & dikonfirmasi
+BoardingPassPrinted --> Idle : Boarding pass diambil
+
+ManualAssistance --> Idle : Petugas selesai bantu
+@enduml

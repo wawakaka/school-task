@@ -1,0 +1,38 @@
+@startuml
+actor Pelanggan
+actor Petugas
+participant "Dispenser" as Dispenser
+participant "EDC / Sistem Pembayaran" as EDC
+
+Pelanggan -> Petugas: "SUPER, isi Rp300.000"
+Petugas -> Dispenser: Aktifkan dispenser (Rp300.000)
+Dispenser --> Petugas: Siap (mulai dari 0)
+Petugas -> Pelanggan: Tawarkan bersihkan kaca
+Pelanggan --> Petugas: Terima
+Petugas -> Pelanggan: Bersihkan kaca
+Dispenser -> Dispenser: Isi bensin hingga Rp300.000
+Dispenser --> Petugas: Berhenti otomatis
+Petugas -> Pelanggan: "Lanjut atau sesuai sensor?"
+Pelanggan --> Petugas: "Sensor aja"
+
+alt Pembayaran Kartu Kredit
+  Petugas -> Pelanggan: Pilih metode pembayaran?
+  Pelanggan --> Petugas: Kartu Kredit
+  Petugas -> EDC: Masukkan kartu & input nominal
+  EDC --> Pelanggan: Minta PIN
+  Pelanggan --> EDC: Masukkan PIN
+  EDC --> EDC: Proses transaksi
+  EDC --> Petugas: "Transaksi Berhasil" + struk
+  Petugas --> Pelanggan: Berikan struk
+else Pembayaran QRIS
+  Petugas -> Pelanggan: Pilih metode pembayaran?
+  Pelanggan --> Petugas: QRIS
+  Petugas -> EDC: Pilih QRIS, input nominal, generate QR
+  EDC --> Pelanggan: Tampilkan QR
+  Pelanggan -> EDC: Scan QR & otentikasi (PIN/biometrik)
+  EDC --> EDC: Proses transaksi
+  EDC --> Petugas: "Transaksi Berhasil" + struk
+  Petugas --> Pelanggan: Berikan struk
+end
+
+@enduml

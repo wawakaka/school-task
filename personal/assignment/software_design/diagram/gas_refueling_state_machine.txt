@@ -1,0 +1,25 @@
+@startuml
+[*] --> MenungguInstruksi
+
+MenungguInstruksi --> StokTidakTersedia : Stok habis
+StokTidakTersedia --> [*]
+
+MenungguInstruksi --> PengisianDimulai : Instruksi valid & stok ada
+PengisianDimulai --> PengisianBerlangsung : Dispenser aktif
+PengisianBerlangsung --> PengisianSelesai : Mencapai nominal / sensor
+
+PengisianSelesai --> MenungguPembayaran : Siap bayar
+MenungguPembayaran --> ProsesKartuKredit : Pilih Kartu Kredit
+MenungguPembayaran --> ProsesQRIS : Pilih QRIS
+
+ProsesKartuKredit --> TransaksiBerhasil : PIN valid & otorisasi sukses
+ProsesQRIS --> TransaksiBerhasil : Scan & otentikasi sukses
+
+TransaksiBerhasil --> [*]
+
+ProsesKartuKredit --> TransaksiGagal : Gagal otorisasi
+ProsesQRIS --> TransaksiGagal : Scan gagal / timeout
+
+TransaksiGagal --> [*]
+
+@enduml

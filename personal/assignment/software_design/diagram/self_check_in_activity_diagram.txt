@@ -1,0 +1,59 @@
+@startuml
+|User|
+start
+:Datang ke mesin self-check-in;
+:Pilih bahasa;
+
+|Sistem|
+:Opsi verifikasi:\nPindai paspor / Kode booking?;
+
+|User|
+if (Pilih "Pindai paspor") then (ya)
+  :Tempatkan paspor di pemindai;
+  |Sistem|
+  :Baca chip paspor?;
+  if (Berhasil?) then (ya)
+    |Sistem|
+    :Cocokkan dengan penerbangan;
+    |User|
+    :Konfirmasi penerbangan;
+  else (tidak)
+    |User|
+    :Coba lagi atau pilih kode booking?;
+    if (Pilih kode booking) then (ya)
+      |User|
+      :Masukkan kode booking + nama belakang;
+      |Sistem|
+      :Verifikasi booking;
+    else (batal)
+      |User|
+      :Hubungi petugas;
+      stop
+    endif
+  endif
+else (kode booking)
+  |User|
+  :Masukkan kode booking + nama belakang;
+  |Sistem|
+  :Verifikasi booking;
+endif
+
+|Sistem|
+if (Verifikasi sukses?) then (ya)
+  :Tampilkan denah kursi;
+  |User|
+  :Pilih kursi;
+  |Sistem|
+  :Simpan pilihan;
+  :Cetak boarding pass;
+  |User|
+  :Ambil boarding pass;
+  stop
+else (gagal 3x)
+  |Sistem|
+  :Tampilkan pesan error;
+  |User|
+  :Hubungi petugas;
+  stop
+endif
+@enduml
