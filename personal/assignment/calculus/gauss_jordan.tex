@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\author{}
+\date{}
+
+\begin{document}
+
+Diberikan sistem persamaan linear:
+\[
+\begin{cases}
+2x + y + z = 9 \\
+x + 2y - z = 6 \\
+3x - y + 2z = 17
+\end{cases}
+\]
+
+Bentuk matriks augmented dari sistem tersebut adalah:
+\[
+\left[\begin{array}{ccc|c}
+2 & 1 & 1 & 9 \\
+1 & 2 & -1 & 6 \\
+3 & -1 & 2 & 17
+\end{array}\right]
+\]
+
+Kita akan melakukan operasi baris elementer untuk mengubah matriks ini menjadi bentuk eselon baris tereduksi (reduced row echelon form).
+
+\textbf{Langkah 1:} Tukar baris 1 dan baris 2 agar elemen pivot di kolom pertama bernilai 1.
+\[
+R_1 \leftrightarrow R_2
+\quad \Rightarrow \quad
+\left[\begin{array}{ccc|c}
+1 & 2 & -1 & 6 \\
+2 & 1 & 1 & 9 \\
+3 & -1 & 2 & 17
+\end{array}\right]
+\]
+
+\textbf{Langkah 2:} Hilangkan elemen di bawah pivot baris pertama.
+\[
+R_2 \leftarrow R_2 - 2R_1, \quad R_3 \leftarrow R_3 - 3R_1
+\]
+\[
+\left[\begin{array}{ccc|c}
+1 & 2 & -1 & 6 \\
+0 & -3 & 3 & -3 \\
+0 & -7 & 5 & -1
+\end{array}\right]
+\]
+
+\textbf{Langkah 3:} Buat pivot baris kedua menjadi 1 dengan membagi baris kedua dengan $-3$.
+\[
+R_2 \leftarrow -\frac{1}{3} R_2
+\quad \Rightarrow \quad
+\left[\begin{array}{ccc|c}
+1 & 2 & -1 & 6 \\
+0 & 1 & -1 & 1 \\
+0 & -7 & 5 & -1
+\end{array}\right]
+\]
+
+\textbf{Langkah 4:} Hilangkan elemen di atas dan di bawah pivot baris kedua.
+\[
+R_1 \leftarrow R_1 - 2R_2, \quad R_3 \leftarrow R_3 + 7R_2
+\]
+\[
+\left[\begin{array}{ccc|c}
+1 & 0 & 1 & 4 \\
+0 & 1 & -1 & 1 \\
+0 & 0 & -2 & 6
+\end{array}\right]
+\]
+
+\textbf{Langkah 5:} Buat pivot baris ketiga menjadi 1.
+\[
+R_3 \leftarrow -\frac{1}{2} R_3
+\quad \Rightarrow \quad
+\left[\begin{array}{ccc|c}
+1 & 0 & 1 & 4 \\
+0 & 1 & -1 & 1 \\
+0 & 0 & 1 & -3
+\end{array}\right]
+\]
+
+\textbf{Langkah 6:} Hilangkan elemen di atas pivot baris ketiga.
+\[
+R_1 \leftarrow R_1 - R_3, \quad R_2 \leftarrow R_2 + R_3
+\]
+\[
+\left[\begin{array}{ccc|c}
+1 & 0 & 0 & 7 \\
+0 & 1 & 0 & -2 \\
+0 & 0 & 1 & -3
+\end{array}\right]
+\]
+
+Matriks sekarang berada dalam bentuk eselon baris tereduksi. Dari sini, kita dapat membaca solusi langsung:
+
+\[
+x = 7, \quad y = -2, \quad z = -3
+\]
+
+\textbf{Jadi, solusi dari sistem persamaan linear tersebut adalah:}
+\[
+\boxed{x = 7, \quad y = -2, \quad z = -3}
+\]
+
+\end{document}

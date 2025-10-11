@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+Diberikan matriks $ A $ sebagai berikut:
+\[
+A = 
+\begin{pmatrix}
+2 & 1 & -2 \\
+4 & -1 & -1 \\
+2 & -1 & 1
+\end{pmatrix}
+\]
+
+Kita akan mencari dekomposisi LU dari matriks $ A $, yaitu $ A = LU $, di mana $ L $ adalah matriks segitiga bawah (lower triangular) dan $ U $ adalah matriks segitiga atas (upper triangular).
+
+Kita gunakan eliminasi Gauss tanpa pivoting untuk memperoleh matriks $ U $, dan elemen-elemen pengali digunakan untuk membentuk matriks $ L $.
+
+\textbf{Langkah 1:} Eliminasi elemen di bawah pivot baris pertama.
+
+Pivot: $ a_{11} = 2 $
+
+- Untuk baris 2: $ R_2 \leftarrow R_2 - \frac{4}{2} R_1 = R_2 - 2R_1 $
+  \[
+  \begin{aligned}
+  \text{Baris 2 baru: } & (4 - 2\cdot2,\ -1 - 2\cdot1,\ -1 - 2\cdot(-2)) \\
+  &= (0,\ -3,\ 3)
+  \end{aligned}
+  \]
+  Pengali: $ l_{21} = 2 $
+
+- Untuk baris 3: $ R_3 \leftarrow R_3 - \frac{2}{2} R_1 = R_3 - R_1 $
+  \[
+  \begin{aligned}
+  \text{Baris 3 baru: } & (2 - 2,\ -1 - 1,\ 1 - (-2)) \\
+  &= (0,\ -2,\ 3)
+  \end{aligned}
+  \]
+  Pengali: $ l_{31} = 1 $
+
+Matriks setelah langkah 1:
+\[
+\begin{pmatrix}
+2 & 1 & -2 \\
+0 & -3 & 3 \\
+0 & -2 & 3
+\end{pmatrix}
+\]
+
+\textbf{Langkah 2:} Eliminasi elemen di bawah pivot baris kedua.
+
+Pivot: $ u_{22} = -3 $
+
+- Untuk baris 3: $ R_3 \leftarrow R_3 - \frac{-2}{-3} R_2 = R_3 - \frac{2}{3} R_2 $
+  \[
+  \begin{aligned}
+  \text{Baris 3 baru: } & \left(0,\ -2 - \frac{2}{3}\cdot(-3),\ 3 - \frac{2}{3}\cdot3\right) \\
+  &= (0,\ -2 + 2,\ 3 - 2) \\
+  &= (0,\ 0,\ 1)
+  \end{aligned}
+  \]
+  Pengali: $ l_{32} = \frac{2}{3} $
+
+Matriks $ U $ (hasil akhir):
+\[
+U = 
+\begin{pmatrix}
+2 & 1 & -2 \\
+0 & -3 & 3 \\
+0 & 0 & 1
+\end{pmatrix}
+\]
+
+Matriks $ L $ dibentuk dengan menempatkan pengali pada posisi yang sesuai dan diagonal utama bernilai 1:
+\[
+L = 
+\begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+1 & \frac{2}{3} & 1
+\end{pmatrix}
+\]
+
+\textbf{Verifikasi:} $ LU = A $
+
+\[
+LU = 
+\begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+1 & \frac{2}{3} & 1
+\end{pmatrix}
+\begin{pmatrix}
+2 & 1 & -2 \\
+0 & -3 & 3 \\
+0 & 0 & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 & 1 & -2 \\
+4 & -1 & -1 \\
+2 & -1 & 1
+\end{pmatrix}
+= A
+\]
+
+Jadi, dekomposisi LU dari matriks $ A $ adalah:
+
+\[
+\boxed{
+L = 
+\begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+1 & \frac{2}{3} & 1
+\end{pmatrix},
+\quad
+U = 
+\begin{pmatrix}
+2 & 1 & -2 \\
+0 & -3 & 3 \\
+0 & 0 & 1
+\end{pmatrix}
+}
+\]
+
+\end{document}
