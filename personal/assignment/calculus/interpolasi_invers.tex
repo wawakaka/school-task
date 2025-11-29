@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+
+\title{Interpolasi Invers dan Peran Monotonik}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Apa arti monotonik dalam hal ini?}
+
+Dalam konteks interpolasi invers, \textbf{monotonik} berarti fungsi yang menghubungkan nilai $x$ dan $y$ bersifat \textit{selalu naik} (monoton naik) atau \textit{selalu turun} (monoton turun) pada interval yang ditinjau.
+\begin{itemize}
+    \item \textbf{Monoton Naik}: Jika $x_1 < x_2$, maka $f(x_1) \leq f(x_2)$ (atau secara ketat: $f(x_1) < f(x_2)$).
+    \item \textbf{Monoton Turun}: Jika $x_1 < x_2$, maka $f(x_1) \geq f(x_2)$ (atau secara ketat: $f(x_1) > f(x_2)$).
+\end{itemize}
+
+Artinya, tidak ada ``naik-turun'' atau fluktuasi — nilai fungsi hanya bergerak satu arah seiring bertambahnya input.
+
+\section*{2. Mengapa monotonik menjadi masalah dalam interpolasi invers?}
+
+Interpolasi invers adalah proses mencari nilai $x$ yang sesuai dengan nilai $y$ tertentu, berdasarkan pasangan data $(x_i, y_i)$. Masalah muncul jika fungsi \textbf{tidak monotonik}, karena:
+
+\subsection*{a. Tidak Unik (Non-Unique Solution)}
+Jika fungsi tidak monotonik, maka satu nilai $y$ dapat berkorespondensi dengan lebih dari satu nilai $x$.
+
+\textbf{Contoh:} Misalkan $y = x^2$ pada interval $[-2, 2]$. Untuk $y = 4$, terdapat dua solusi: $x = -2$ dan $x = 2$. \\
+$\Rightarrow$ Interpolasi invers tidak tahu solusi mana yang harus dipilih.
+
+\subsection*{b. Tidak Invertibel (Not Invertible)}
+Fungsi yang tidak monotonik \textbf{tidak memiliki invers yang merupakan fungsi}, karena melanggar definisi fungsi (satu input $\rightarrow$ satu output). Interpolasi invers mengasumsikan bahwa hubungan antara $x$ dan $y$ dapat dibalik, yang hanya dijamin jika fungsi monotonik.
+
+\subsection*{c. Kesalahan Interpolasi}
+Algoritma interpolasi (misalnya Lagrange atau spline) dapat memberikan hasil yang salah atau tidak stabil jika diterapkan pada data non-monotonik, karena tidak jelas arah pencarian nilai $x$ untuk $y$ tertentu.
+
+\section*{Kesimpulan}
+
+\begin{description}
+    \item[$\checkmark$] Interpolasi invers bekerja dengan baik hanya jika fungsi \textbf{monotonik}, karena:
+    \item Menjamin keunikan solusi.
+        \item Memastikan fungsi invertibel.
+        \item Mencegah ambiguitas dan kesalahan numerik.
+    
+    \item[$\times$] Jika fungsi tidak monotonik, pertimbangkan:
+    \item Membagi interval menjadi bagian-bagian yang monotonik.
+        \item Menggunakan metode alternatif seperti pencarian akar (\textit{root finding}) dengan batasan tambahan.
+\end{description}
+
+\end{document}

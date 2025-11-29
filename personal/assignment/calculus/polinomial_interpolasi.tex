@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\title{Polinomial Interpolasi}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Diketahui:}
+Kita akan mengukur suhu pada dua waktu:
+\begin{itemize}
+    \item Pada jam 2 siang ($X_0 = 2$), suhunya $Y_0 = 20$ derajat.
+    \item Pada jam 6 sore ($X_1 = 6$), suhunya $Y_1 = 12$ derajat.
+\end{itemize}
+Tentukan perkiraan suhu pada jam 4 sore ($X = 4$).
+
+\section*{Solusi:}
+
+Gunakan rumus interpolasi linear:
+\[
+y = y_0 + \frac{(y_1 - y_0)}{(x_1 - x_0)} (x - x_0)
+\]
+
+Substitusi nilai:
+\[
+y = 20 + \frac{(12 - 20)}{(6 - 2)} (4 - 2)
+= 20 + \frac{-8}{4} \cdot 2
+= 20 - 4
+= 16
+\]
+
+\section*{Jawaban:}
+Perkiraan suhu pada jam 4 sore adalah \textbf{16 derajat}.
+
+\end{document}
