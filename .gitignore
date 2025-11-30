@@ -50,3 +50,38 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Folder build
+out/
+build/
+target/
+dist/
+
+# IDE Files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Compiled files
+*.class
+*.jar
+*.war
+*.ear
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Gradle
+.gradle/
+
+# Maven
+dependency-reduced-pom.xml
+
+# Others
+*.log
+*.swp
+*.swo
+~*
