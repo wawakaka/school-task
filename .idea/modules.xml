@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/personal/assignment/data_structures_and_algorithm_analysis/data_structures_and_algorithm_analysis.iml" filepath="$PROJECT_DIR$/personal/assignment/data_structures_and_algorithm_analysis/data_structures_and_algorithm_analysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/personal/assignment/data_structures_and_algorithm_analysis/group_task_2/group_task_2.iml" filepath="$PROJECT_DIR$/personal/assignment/data_structures_and_algorithm_analysis/group_task_2/group_task_2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/school-task.iml" filepath="$PROJECT_DIR$/.idea/school-task.iml" />
       <module fileurl="file://$PROJECT_DIR$/personal/assignment/software_design/software_design.iml" filepath="$PROJECT_DIR$/personal/assignment/software_design/software_design.iml" />
     </modules>
