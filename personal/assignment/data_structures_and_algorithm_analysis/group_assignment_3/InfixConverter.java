@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class InfixConverter {
-
+    
     // Cek urutan kekuatan operator
     static int precedence(char ch) {
         switch (ch) {
@@ -10,7 +10,7 @@ public class InfixConverter {
         }
         return -1;
     }
-
+    
     // 1. Validasi infix
     public static boolean validateInfix(String expression) {
         // Hapus spasi untuk validasi
@@ -42,8 +42,8 @@ public class InfixConverter {
     // Cek karakter
     private static boolean isValidCharacter(char c) {
         return Character.isDigit(c) || 
-               c == '+' || c == '-' || c == '*' || c == '/' || 
-               c == '(' || c == ')';
+        c == '+' || c == '-' || c == '*' || c == '/' || 
+        c == '(' || c == ')';
     }
     
     // Cek kurung seimbang
@@ -121,7 +121,7 @@ public class InfixConverter {
         while (!stack.isEmpty()) result.append(stack.pop());
         return result.toString();
     }
-
+    
     // Konversi ke Prefix (Balik infix -> Postfix-kan -> Balik lagi)
     static String toPrefix(String exp) {
         StringBuilder rev = new StringBuilder(exp).reverse();
@@ -129,7 +129,7 @@ public class InfixConverter {
         String revesedPostfix = new StringBuilder(postfix).reverse().toString();
         return revesedPostfix;
     }
-
+    
     // Hitung hasil operasi (Evaluasi Postfix)
     static double evaluatePostfix(String exp) {
         Stack<Double> stack = new Stack<>();
@@ -148,7 +148,7 @@ public class InfixConverter {
         }
         return stack.pop();
     }
-
+    
     // Main program   
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -156,7 +156,7 @@ public class InfixConverter {
         
         System.out.print("\nMasukkan notasi infix: ");
         currentInfix = scanner.nextLine();
-
+        
         System.out.println("\nExpression: " + currentInfix);
         if (validateInfix(currentInfix)) {
             System.out.println("Valid");
