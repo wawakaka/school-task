@@ -1,0 +1,69 @@
+@startuml
+' Hide the class icon spot for a cleaner ERD look
+hide circle
+
+' Use orthogonal lines for cleaner routing
+skinparam linetype ortho
+
+entity "Karyawan" as Karyawan {
+  * no_karyawan : string <<PK>>
+  --
+  nama : string
+  alamat : string
+  no_hp : string
+}
+
+entity "Supplier" as Supplier {
+  * kode_supplier : string <<PK>>
+  --
+  nama_supplier : string
+  penanggungjawab : string
+  no_telpon : string
+}
+
+entity "Bahan_Makanan" as Bahan_Makanan {
+  * nama_bahan : string <<PK>>
+  --
+  stok : int
+}
+
+entity "Penerimaan" as Penerimaan {
+  * no_penerimaan : string <<PK>>
+  --
+  tanggal_penerimaan : date
+  kode_supplier : string <<FK>>
+  no_karyawan : string <<FK>>
+}
+
+entity "Detail_Penerimaan" as Detail_Penerimaan {
+  * no_penerimaan : string <<PK, FK>>
+  * nama_bahan : string <<PK, FK>>
+  --
+  harga : float
+  jumlah : int
+}
+
+entity "Penggunaan" as Penggunaan {
+  * no_penggunaan : string <<PK>>
+  --
+  tanggal_penggunaan : date
+  no_karyawan : string <<FK>>
+}
+
+entity "Detail_Penggunaan" as Detail_Penggunaan {
+  * no_penggunaan : string <<PK, FK>>
+  * nama_bahan : string <<PK, FK>>
+  --
+  jumlah : int
+}
+
+' Relationships
+Karyawan ||--o{ Penerimaan : "menangani"
+Karyawan ||--o{ Penggunaan : "mencatat"
+Supplier ||--o{ Penerimaan : "mengirim"
+Penerimaan ||--|{ Detail_Penerimaan : "memiliki"
+Bahan_Makanan ||--o{ Detail_Penerimaan : "terdapat pada"
+Penggunaan ||--|{ Detail_Penggunaan : "memiliki"
+Bahan_Makanan ||--o{ Detail_Penggunaan : "digunakan pada"
+
+@enduml
